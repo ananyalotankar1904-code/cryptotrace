@@ -26,7 +26,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:5173",
-        "https://cryptotrace-nine.vercel.app",
+        "https://cryptotrace-mcgbdn055-ananyalotankar1904-codes-projects.vercel.app",
     ],
     allow_credentials=False,
     allow_methods=["GET", "OPTIONS"],
