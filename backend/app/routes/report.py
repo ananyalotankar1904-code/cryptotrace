@@ -2,6 +2,7 @@ import os
 from typing import Dict, Any
 from fastapi import APIRouter, HTTPException, BackgroundTasks
 from fastapi.responses import FileResponse
+from app.models.report import ReportPayload
 import sys
 
 # Ensure backend root is in sys.path to import generate_report_pdf
@@ -21,9 +22,9 @@ def remove_file(path: str):
         print(f"Failed to remove temp file {path}: {e}")
 
 @router.post("/investigation")
-async def generate_investigation_report(payload: Dict[str, Any], background_tasks: BackgroundTasks):
+async def generate_investigation_report(payload: ReportPayload, background_tasks: BackgroundTasks):
     try:
-        pdf_path = generate_pdf_from_payload(payload)
+        pdf_path = generate_pdf_from_payload(payload.dict(by_alias=True))
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"PDF generation failed: {str(e)}")
 
