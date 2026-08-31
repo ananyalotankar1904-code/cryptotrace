@@ -590,27 +590,14 @@ def generate_pdf_from_payload(payload: dict) -> str:
     with open(html_file, "w", encoding="utf-8") as f:
         f.write(html_content)
 
-    edge_path = r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
-    chrome_path = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
-    
-    browser_path = edge_path if os.path.exists(edge_path) else chrome_path
-    if not os.path.exists(browser_path):
-        raise FileNotFoundError("Neither Microsoft Edge nor Google Chrome was found for PDF generation.")
+    try:
+        from weasyprint import HTML
+        HTML(string=html_content).write_pdf(pdf_file)
+    except Exception as e:
+        if os.path.exists(html_file):
+            os.remove(html_file)
+        raise Exception(f"WeasyPrint PDF generation failed: {str(e)}")
 
-    file_url = f"file:///{html_file.replace(os.sep, '/')}"
-
-    cmd = [
-        browser_path,
-        "--headless",
-        "--disable-gpu",
-        "--no-margins",
-        f"--print-to-pdf={pdf_file}",
-        "--no-pdf-header-footer",
-        file_url,
-    ]
-
-    result = subprocess.run(cmd, capture_output=True, text=True)
-    
     # Cleanup HTML
     if os.path.exists(html_file):
         os.remove(html_file)
@@ -618,4 +605,4 @@ def generate_pdf_from_payload(payload: dict) -> str:
     if os.path.exists(pdf_file) and os.path.getsize(pdf_file) > 0:
         return pdf_file
     else:
-        raise Exception(f"PDF generation failed. Stderr: {result.stderr}")
+        raise Exception("PDF generation failed. File not created or empty.")
