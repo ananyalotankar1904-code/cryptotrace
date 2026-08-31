@@ -29,7 +29,7 @@ app.add_middleware(
         "https://cryptotrace-mcgbdn055-ananyalotankar1904-codes-projects.vercel.app",
     ],
     allow_credentials=False,
-    allow_methods=["GET", "OPTIONS"],
+    allow_methods=["GET", "POST", "OPTIONS"],
     allow_headers=["Accept", "Content-Type"],
 )
 
