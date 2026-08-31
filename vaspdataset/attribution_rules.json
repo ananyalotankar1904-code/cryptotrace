@@ -1,0 +1,19 @@
+{
+  "rule_set_name": "VASP Attribution Rules - Prototype",
+  "version": "1.1.0",
+  "rules": [
+    {"rule_id":"R01","match_type":"Exact verified match","condition":"Destination address exactly matches a known_verified address on Ethereum.","result":"Return VASP, confidence high, and retained source evidence."},
+    {"rule_id":"R02","match_type":"Known cluster or strong support","condition":"Reliable supporting evidence links the destination to a known VASP cluster, but there is no exact verified record.","result":"Return possible VASP, confidence medium_high; flag as probable_inferred."},
+    {"rule_id":"R03","match_type":"Behavioral inference only","condition":"Only transaction patterns or heuristics suggest a VASP relationship.","result":"Return possible VASP, confidence medium or low; never mark known_verified."},
+    {"rule_id":"R04","match_type":"No match","condition":"No exact record or sufficient supporting evidence exists.","result":"Return likely_vasp null and confidence unknown."},
+    {"rule_id":"R05","match_type":"Conflicting evidence","condition":"Sources name different entities for the same destination address.","result":"Return confidence manual_review and preserve all evidence; do not choose a VASP automatically."}
+  ],
+  "confidence_categories": [
+    {"category":"high","meaning":"Exact match with an active, source-backed verified address."},
+    {"category":"medium_high","meaning":"Known cluster or strong supporting evidence, but not a direct verified address match."},
+    {"category":"medium","meaning":"Behavioral or pattern evidence with meaningful limitations."},
+    {"category":"low","meaning":"Weak indirect evidence; present as a lead only."},
+    {"category":"unknown","meaning":"No sufficient VASP match."},
+    {"category":"manual_review","meaning":"Conflicting or unresolved evidence."}
+  ]
+}

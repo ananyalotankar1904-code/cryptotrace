@@ -1,0 +1,475 @@
+{
+  "root_wallet": "0xmock_suspect_a0000000000000000000000000000",
+  "wallet_count": 6,
+  "transaction_count": 6,
+  "max_hop": 3,
+  "risk_score": 85,
+  "risk_level": "CRITICAL",
+  "risk_indicators": [
+    "Victim-reported seed suspect wallet baseline",
+    "Deep multi-hop fund flow (3 hops across 6 wallets)",
+    "Rapid successive transfers (avg interval under 30 minutes)",
+    "High transaction frequency (18.0 tx/hour)",
+    "Network contains 2 transit intermediary wallets"
+  ],
+  "risk_indicator_details": [
+    {
+      "code": "REPORTED_SUSPECT_PRIOR",
+      "points": 20,
+      "reason": "Wallet 0xmock_sus... was flagged as initial suspect address in victim incident report."
+    },
+    {
+      "code": "DEEP_MULTI_HOP",
+      "points": 20,
+      "reason": "Funds propagated across 3 sequential hops, characteristic of layering behavior."
+    },
+    {
+      "code": "RAPID_SUCCESSIVE_TRANSFERS",
+      "points": 20,
+      "reason": "Transactions occurred in rapid succession with average interval of 5.0 minutes."
+    },
+    {
+      "code": "HIGH_TX_FREQUENCY",
+      "points": 15,
+      "reason": "High burst rate of 18.0 transactions per hour observed on suspect wallet."
+    },
+    {
+      "code": "TRANSIT_INTERMEDIARY_WALLETS",
+      "points": 10,
+      "reason": "Found 2 wallets in the path that both received and immediately forwarded funds."
+    }
+  ],
+  "known_entities": [
+    {
+      "address": "0xmock_vasp_binance_f5555555555555555555555",
+      "entity": "Binance",
+      "entity_type": "KNOWN_VASP",
+      "hop": 3,
+      "metadata": {
+        "entity": "Binance",
+        "entity_type": "KNOWN_VASP",
+        "blockchain": "ethereum",
+        "address_type": "deposit_hot_wallet",
+        "confidence": "VERIFIED_OFFICIAL",
+        "source": "Etherscan Public Label"
+      }
+    }
+  ],
+  "nodes": [
+    {
+      "id": "0xmock_suspect_a0000000000000000000000000000",
+      "type": "suspect",
+      "hop": 0,
+      "known_entity": null,
+      "entity_type": null
+    },
+    {
+      "id": "0xmock_intermediary_b11111111111111111111111",
+      "type": "wallet",
+      "hop": 1,
+      "known_entity": null,
+      "entity_type": null
+    },
+    {
+      "id": "0xmock_intermediary_c22222222222222222222222",
+      "type": "wallet",
+      "hop": 1,
+      "known_entity": null,
+      "entity_type": null
+    },
+    {
+      "id": "0xmock_mule_d33333333333333333333333333333333",
+      "type": "wallet",
+      "hop": 2,
+      "known_entity": null,
+      "entity_type": null
+    },
+    {
+      "id": "0xmock_cold_e44444444444444444444444444444444444",
+      "type": "wallet",
+      "hop": 2,
+      "known_entity": null,
+      "entity_type": null
+    },
+    {
+      "id": "0xmock_vasp_binance_f5555555555555555555555",
+      "type": "wallet",
+      "hop": 3,
+      "known_entity": "Binance",
+      "entity_type": "KNOWN_VASP"
+    }
+  ],
+  "edges": [
+    {
+      "source": "0xmock_suspect_a0000000000000000000000000000",
+      "target": "0xmock_intermediary_b11111111111111111111111",
+      "asset": "ETH",
+      "value": 2.5,
+      "transaction_hash": "0xmock_tx_001_a_to_b_eth",
+      "timestamp": "2026-08-30T10:00:00Z",
+      "block_number": "19000001",
+      "category": "external",
+      "hop": 1
+    },
+    {
+      "source": "0xmock_suspect_a0000000000000000000000000000",
+      "target": "0xmock_intermediary_b11111111111111111111111",
+      "asset": "USDT",
+      "value": 1000.0,
+      "transaction_hash": "0xmock_tx_002_a_to_b_usdt",
+      "timestamp": "2026-08-30T10:05:00Z",
+      "block_number": "19000002",
+      "category": "erc20",
+      "hop": 1
+    },
+    {
+      "source": "0xmock_suspect_a0000000000000000000000000000",
+      "target": "0xmock_intermediary_c22222222222222222222222",
+      "asset": "ETH",
+      "value": 1.0,
+      "transaction_hash": "0xmock_tx_003_a_to_c_eth",
+      "timestamp": "2026-08-30T10:10:00Z",
+      "block_number": "19000003",
+      "category": "external",
+      "hop": 1
+    },
+    {
+      "source": "0xmock_intermediary_b11111111111111111111111",
+      "target": "0xmock_mule_d33333333333333333333333333333333",
+      "asset": "ETH",
+      "value": 2.4,
+      "transaction_hash": "0xmock_tx_004_b_to_d_eth",
+      "timestamp": "2026-08-30T10:20:00Z",
+      "block_number": "19000010",
+      "category": "external",
+      "hop": 2
+    },
+    {
+      "source": "0xmock_intermediary_b11111111111111111111111",
+      "target": "0xmock_cold_e44444444444444444444444444444444444",
+      "asset": "ETH",
+      "value": 0.08,
+      "transaction_hash": "0xmock_tx_005_b_to_e_eth",
+      "timestamp": "2026-08-30T10:22:00Z",
+      "block_number": "19000011",
+      "category": "external",
+      "hop": 2
+    },
+    {
+      "source": "0xmock_mule_d33333333333333333333333333333333",
+      "target": "0xmock_vasp_binance_f5555555555555555555555",
+      "asset": "ETH",
+      "value": 2.35,
+      "transaction_hash": "0xmock_tx_006_d_to_f_binance_eth",
+      "timestamp": "2026-08-30T10:45:00Z",
+      "block_number": "19000025",
+      "category": "external",
+      "hop": 3
+    }
+  ],
+  "paths": [
+    {
+      "path": [
+        "0xmock_suspect_a0000000000000000000000000000",
+        "0xmock_intermediary_c22222222222222222222222"
+      ],
+      "hops": 1,
+      "terminal_wallet": "0xmock_intermediary_c22222222222222222222222",
+      "terminal_entity": null,
+      "transfers": [
+        {
+          "from": "0xmock_suspect_a0000000000000000000000000000",
+          "to": "0xmock_intermediary_c22222222222222222222222",
+          "asset": "ETH",
+          "value": 1.0,
+          "tx_hash": "0xmock_tx_003_a_to_c_eth",
+          "timestamp": "2026-08-30T10:10:00Z"
+        }
+      ]
+    },
+    {
+      "path": [
+        "0xmock_suspect_a0000000000000000000000000000",
+        "0xmock_intermediary_b11111111111111111111111",
+        "0xmock_cold_e44444444444444444444444444444444444"
+      ],
+      "hops": 2,
+      "terminal_wallet": "0xmock_cold_e44444444444444444444444444444444444",
+      "terminal_entity": null,
+      "transfers": [
+        {
+          "from": "0xmock_suspect_a0000000000000000000000000000",
+          "to": "0xmock_intermediary_b11111111111111111111111",
+          "asset": "ETH",
+          "value": 2.5,
+          "tx_hash": "0xmock_tx_001_a_to_b_eth",
+          "timestamp": "2026-08-30T10:00:00Z"
+        },
+        {
+          "from": "0xmock_suspect_a0000000000000000000000000000",
+          "to": "0xmock_intermediary_b11111111111111111111111",
+          "asset": "USDT",
+          "value": 1000.0,
+          "tx_hash": "0xmock_tx_002_a_to_b_usdt",
+          "timestamp": "2026-08-30T10:05:00Z"
+        },
+        {
+          "from": "0xmock_intermediary_b11111111111111111111111",
+          "to": "0xmock_cold_e44444444444444444444444444444444444",
+          "asset": "ETH",
+          "value": 0.08,
+          "tx_hash": "0xmock_tx_005_b_to_e_eth",
+          "timestamp": "2026-08-30T10:22:00Z"
+        }
+      ]
+    },
+    {
+      "path": [
+        "0xmock_suspect_a0000000000000000000000000000",
+        "0xmock_intermediary_b11111111111111111111111",
+        "0xmock_mule_d33333333333333333333333333333333",
+        "0xmock_vasp_binance_f5555555555555555555555"
+      ],
+      "hops": 3,
+      "terminal_wallet": "0xmock_vasp_binance_f5555555555555555555555",
+      "terminal_entity": "Binance",
+      "transfers": [
+        {
+          "from": "0xmock_suspect_a0000000000000000000000000000",
+          "to": "0xmock_intermediary_b11111111111111111111111",
+          "asset": "ETH",
+          "value": 2.5,
+          "tx_hash": "0xmock_tx_001_a_to_b_eth",
+          "timestamp": "2026-08-30T10:00:00Z"
+        },
+        {
+          "from": "0xmock_suspect_a0000000000000000000000000000",
+          "to": "0xmock_intermediary_b11111111111111111111111",
+          "asset": "USDT",
+          "value": 1000.0,
+          "tx_hash": "0xmock_tx_002_a_to_b_usdt",
+          "timestamp": "2026-08-30T10:05:00Z"
+        },
+        {
+          "from": "0xmock_intermediary_b11111111111111111111111",
+          "to": "0xmock_mule_d33333333333333333333333333333333",
+          "asset": "ETH",
+          "value": 2.4,
+          "tx_hash": "0xmock_tx_004_b_to_d_eth",
+          "timestamp": "2026-08-30T10:20:00Z"
+        },
+        {
+          "from": "0xmock_mule_d33333333333333333333333333333333",
+          "to": "0xmock_vasp_binance_f5555555555555555555555",
+          "asset": "ETH",
+          "value": 2.35,
+          "tx_hash": "0xmock_tx_006_d_to_f_binance_eth",
+          "timestamp": "2026-08-30T10:45:00Z"
+        }
+      ]
+    }
+  ],
+  "wallet_features": {
+    "0xmock_suspect_a0000000000000000000000000000": {
+      "address": "0xmock_suspect_a0000000000000000000000000000",
+      "hop_from_root": 0,
+      "node_type": "suspect",
+      "known_entity": null,
+      "entity_type": null,
+      "incoming_tx_count": 0,
+      "outgoing_tx_count": 3,
+      "total_tx_count": 3,
+      "unique_incoming_counterparties": 0,
+      "unique_outgoing_counterparties": 2,
+      "connected_wallets_count": 2,
+      "repeated_interactions_count": 1,
+      "unique_assets_count": 2,
+      "assets_involved": [
+        "ETH",
+        "USDT"
+      ],
+      "total_incoming_value_by_asset": {},
+      "total_outgoing_value_by_asset": {
+        "ETH": 3.5,
+        "USDT": 1000.0
+      },
+      "primary_incoming_eth_value": 0.0,
+      "primary_outgoing_eth_value": 3.5,
+      "earliest_timestamp": 1788084000.0,
+      "latest_timestamp": 1788084600.0,
+      "time_span_seconds": 600.0,
+      "avg_time_between_tx_seconds": 300.0,
+      "tx_frequency_per_hour": 18.0,
+      "is_intermediary": false,
+      "is_consolidation_hub": false,
+      "is_splitting_hub": false
+    },
+    "0xmock_intermediary_b11111111111111111111111": {
+      "address": "0xmock_intermediary_b11111111111111111111111",
+      "hop_from_root": 1,
+      "node_type": "wallet",
+      "known_entity": null,
+      "entity_type": null,
+      "incoming_tx_count": 2,
+      "outgoing_tx_count": 2,
+      "total_tx_count": 4,
+      "unique_incoming_counterparties": 1,
+      "unique_outgoing_counterparties": 2,
+      "connected_wallets_count": 3,
+      "repeated_interactions_count": 1,
+      "unique_assets_count": 2,
+      "assets_involved": [
+        "ETH",
+        "USDT"
+      ],
+      "total_incoming_value_by_asset": {
+        "ETH": 2.5,
+        "USDT": 1000.0
+      },
+      "total_outgoing_value_by_asset": {
+        "ETH": 2.48
+      },
+      "primary_incoming_eth_value": 2.5,
+      "primary_outgoing_eth_value": 2.48,
+      "earliest_timestamp": 1788084000.0,
+      "latest_timestamp": 1788085320.0,
+      "time_span_seconds": 1320.0,
+      "avg_time_between_tx_seconds": 440.0,
+      "tx_frequency_per_hour": 10.91,
+      "is_intermediary": true,
+      "is_consolidation_hub": false,
+      "is_splitting_hub": false
+    },
+    "0xmock_intermediary_c22222222222222222222222": {
+      "address": "0xmock_intermediary_c22222222222222222222222",
+      "hop_from_root": 1,
+      "node_type": "wallet",
+      "known_entity": null,
+      "entity_type": null,
+      "incoming_tx_count": 1,
+      "outgoing_tx_count": 0,
+      "total_tx_count": 1,
+      "unique_incoming_counterparties": 1,
+      "unique_outgoing_counterparties": 0,
+      "connected_wallets_count": 1,
+      "repeated_interactions_count": 0,
+      "unique_assets_count": 1,
+      "assets_involved": [
+        "ETH"
+      ],
+      "total_incoming_value_by_asset": {
+        "ETH": 1.0
+      },
+      "total_outgoing_value_by_asset": {},
+      "primary_incoming_eth_value": 1.0,
+      "primary_outgoing_eth_value": 0.0,
+      "earliest_timestamp": 1788084600.0,
+      "latest_timestamp": 1788084600.0,
+      "time_span_seconds": 0.0,
+      "avg_time_between_tx_seconds": 0.0,
+      "tx_frequency_per_hour": 0.0,
+      "is_intermediary": false,
+      "is_consolidation_hub": false,
+      "is_splitting_hub": false
+    },
+    "0xmock_mule_d33333333333333333333333333333333": {
+      "address": "0xmock_mule_d33333333333333333333333333333333",
+      "hop_from_root": 2,
+      "node_type": "wallet",
+      "known_entity": null,
+      "entity_type": null,
+      "incoming_tx_count": 1,
+      "outgoing_tx_count": 1,
+      "total_tx_count": 2,
+      "unique_incoming_counterparties": 1,
+      "unique_outgoing_counterparties": 1,
+      "connected_wallets_count": 2,
+      "repeated_interactions_count": 0,
+      "unique_assets_count": 1,
+      "assets_involved": [
+        "ETH"
+      ],
+      "total_incoming_value_by_asset": {
+        "ETH": 2.4
+      },
+      "total_outgoing_value_by_asset": {
+        "ETH": 2.35
+      },
+      "primary_incoming_eth_value": 2.4,
+      "primary_outgoing_eth_value": 2.35,
+      "earliest_timestamp": 1788085200.0,
+      "latest_timestamp": 1788086700.0,
+      "time_span_seconds": 1500.0,
+      "avg_time_between_tx_seconds": 1500.0,
+      "tx_frequency_per_hour": 4.8,
+      "is_intermediary": true,
+      "is_consolidation_hub": false,
+      "is_splitting_hub": false
+    },
+    "0xmock_cold_e44444444444444444444444444444444444": {
+      "address": "0xmock_cold_e44444444444444444444444444444444444",
+      "hop_from_root": 2,
+      "node_type": "wallet",
+      "known_entity": null,
+      "entity_type": null,
+      "incoming_tx_count": 1,
+      "outgoing_tx_count": 0,
+      "total_tx_count": 1,
+      "unique_incoming_counterparties": 1,
+      "unique_outgoing_counterparties": 0,
+      "connected_wallets_count": 1,
+      "repeated_interactions_count": 0,
+      "unique_assets_count": 1,
+      "assets_involved": [
+        "ETH"
+      ],
+      "total_incoming_value_by_asset": {
+        "ETH": 0.08
+      },
+      "total_outgoing_value_by_asset": {},
+      "primary_incoming_eth_value": 0.08,
+      "primary_outgoing_eth_value": 0.0,
+      "earliest_timestamp": 1788085320.0,
+      "latest_timestamp": 1788085320.0,
+      "time_span_seconds": 0.0,
+      "avg_time_between_tx_seconds": 0.0,
+      "tx_frequency_per_hour": 0.0,
+      "is_intermediary": false,
+      "is_consolidation_hub": false,
+      "is_splitting_hub": false
+    },
+    "0xmock_vasp_binance_f5555555555555555555555": {
+      "address": "0xmock_vasp_binance_f5555555555555555555555",
+      "hop_from_root": 3,
+      "node_type": "wallet",
+      "known_entity": "Binance",
+      "entity_type": "KNOWN_VASP",
+      "incoming_tx_count": 1,
+      "outgoing_tx_count": 0,
+      "total_tx_count": 1,
+      "unique_incoming_counterparties": 1,
+      "unique_outgoing_counterparties": 0,
+      "connected_wallets_count": 1,
+      "repeated_interactions_count": 0,
+      "unique_assets_count": 1,
+      "assets_involved": [
+        "ETH"
+      ],
+      "total_incoming_value_by_asset": {
+        "ETH": 2.35
+      },
+      "total_outgoing_value_by_asset": {},
+      "primary_incoming_eth_value": 2.35,
+      "primary_outgoing_eth_value": 0.0,
+      "earliest_timestamp": 1788086700.0,
+      "latest_timestamp": 1788086700.0,
+      "time_span_seconds": 0.0,
+      "avg_time_between_tx_seconds": 0.0,
+      "tx_frequency_per_hour": 0.0,
+      "is_intermediary": false,
+      "is_consolidation_hub": false,
+      "is_splitting_hub": false
+    }
+  },
+  "disclaimer": "INVESTIGATION NOTICE: Analyzed paths represent transaction relationship candidate flows and risk indicators based on observable ledger transfers. They do not constitute conclusive forensic proof of specific fund commingling or legal criminal guilt."
+}
